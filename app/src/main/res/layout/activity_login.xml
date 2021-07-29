@@ -15,7 +15,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="手机快捷登录"
+        android:text="@string/Login_TopText"
         android:textStyle="bold"
         android:layout_marginTop="30dp"
         android:textSize="20sp"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
+        android:importantForAutofill="no" />
     <!-- android:inputType="number"可以改变输入的形式，比如加密，以及键盘 -->
     <EditText
         android:id="@+id/password"
@@ -54,17 +54,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
-        />
+        android:importantForAutofill="no"
+        tools:ignore="TextFields" />
     <TextView
         android:id="@+id/authCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
-        android:text="获取验证码"
-        android:textColor="#3689AF"
+        android:text="@string/Login_GetCode"
         app:layout_constraintBaseline_toBaselineOf="@id/password"
         app:layout_constraintEnd_toEndOf="@id/password"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp"
+        android:enabled="false"
+        />
 
     <TextView
         android:id="@id/text"
@@ -74,8 +76,8 @@
         android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="@id/password"
         app:layout_constraintTop_toBottomOf="@id/password"
-        android:text="未注册的手机验证后会自动注册"
-        />
+        android:text="@string/Login_middleText"
+        android:layout_marginStart="5dp" />
     <ProgressBar
         android:id="@+id/loading"
         android:layout_width="wrap_content"

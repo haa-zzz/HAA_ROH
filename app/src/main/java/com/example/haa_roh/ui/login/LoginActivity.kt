@@ -2,20 +2,30 @@ package com.example.haa_roh.ui.login
 
 import android.os.Bundle
 import android.view.View
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.haa_roh.R
+import com.example.haa_roh.R.color.*
 import com.example.haa_roh.base.BaseActivity
 import com.example.haa_roh.databinding.ActivityLoginBinding
+import com.example.haa_roh.db.NOTFWTHEAUTOCODE
 import com.example.haa_roh.util.afterTextChanged
 
 class LoginActivity : BaseActivity() {
     private lateinit var binding : ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
+
+    private lateinit var phone : EditText
+    private lateinit var code : EditText
+    private lateinit var login : Button
+    private lateinit var loading : ProgressBar
+    private lateinit var authCode : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
         initData()
-
     }
     private fun initView() {
         //获取ViewBinding
@@ -25,58 +35,81 @@ class LoginActivity : BaseActivity() {
     private fun initData() {
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-
+        phone = binding.username
+        code = binding.password
+        login = binding.login
+        loading = binding.loading
+        authCode = binding.authCode
         //获取输入并检测输入格式是否正确
         initInputData()
         initAuthCodeData()
+        initVerifyData()
     }
-
     private fun initAuthCodeData() {
-
+        authCode.setOnClickListener{
+            NOTFWTHEAUTOCODE = false
+            loginViewModel.loginSendCode(phone.text.toString().trim() )
+        }
+        loginViewModel.loginGetAutoCode.observe(this, Observer {
+            val loginAutoCode = it ?: return@Observer
+            if( loginAutoCode.error != null ){
+                Toast.makeText(this,"发送失败",Toast.LENGTH_LONG).show()
+            }
+        })
+        loginViewModel.loginCountNumber.observe(this, Observer {
+            val countNumber = it ?: return@Observer
+            if(countNumber.textCountNumber != null){
+                authCode.text = countNumber.textCountNumber
+            }
+            authCode.setBackgroundResource(countNumber.textColor)
+            authCode.isEnabled = countNumber.isEnable
+        })
     }
-    private fun initInputData() {
-        val username = binding.username
-        val password = binding.password
-        val login = binding.login
-        val loading = binding.loading
-        val authCode = binding.authCode
 
+    private fun initInputData() {
         //输入发生改变后，调用ViewModel中的方法区判断输入是否有异常
-        username.afterTextChanged {
+        phone.afterTextChanged {
             loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
+                phone.text.toString().trim(),
+                code.text.toString().trim()
             )
         }
-        password.afterTextChanged {
+        code.afterTextChanged {
             loginViewModel.loginDataChanged(
-                username.text.toString(),
-                password.text.toString()
+                phone.text.toString().trim(),
+                code.text.toString().trim()
             )
         }
         loginViewModel.loginFormState.observe(this, Observer {
             val loginState = it ?:  return@Observer
             //根据登录状态 设置 login按钮是否可以点击
-            login.isEnabled = loginState.isDataValid
-
+            //login.isEnabled = loginState.isDataValid
             if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+                phone.error = getString(loginState.usernameError)
             }
-            if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+            else {
+                //可以发验证码了
+                    if(NOTFWTHEAUTOCODE){
+                        authCode.isEnabled = loginState.isUserNameValid
+                        authCode.setBackgroundResource(R.color.authCode)
+                    }
+                login.isEnabled = loginState.isUserNameValid && loginState.isPasswordValid
             }
         })
+    }
 
-        authCode.setOnClickListener{
+    private fun initVerifyData() {
 
-        }
         login.setOnClickListener{
             //点击登录后设置 等待 可见
             loading.visibility = View.VISIBLE
-            //
+            loginViewModel.loginVerificationResult(phone.text.toString().trim(),
+                code.text.toString().trim())
         }
+
+        loginViewModel.loginResult.observe(this, Observer {
+
+        })
     }
-
-
 
 }

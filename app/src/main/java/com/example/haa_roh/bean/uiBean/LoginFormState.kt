@@ -8,4 +8,6 @@ package com.example.haa_roh.bean.uiBean
 data class LoginFormState(
     val usernameError: Int? = null,
     val passwordError: Int? = null,
-    val isDataValid: Boolean = false)
+    val isUserNameValid: Boolean = false,
+    val isPasswordValid : Boolean = false
+)
