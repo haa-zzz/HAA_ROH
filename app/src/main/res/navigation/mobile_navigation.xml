@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
-
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.haa_roh.ui.diary.DiaryFragment"
+        android:name="com.example.haa_roh.ui.plan.PlanFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.haa_roh.ui.plan.PlanFragment"
+        android:name="com.example.haa_roh.ui.diary.DiaryFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
@@ -22,4 +20,19 @@
         android:name="com.example.haa_roh.ui.share.ShareFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_advice"
+        android:name="com.example.haa_roh.ui.my.adviceFragment"
+        android:label="吐个槽"
+        tools:layout="@layout/fragment_advice" />
+    <fragment
+        android:id="@+id/navigation_about"
+        android:name="com.example.haa_roh.ui.my.aboutFragment"
+        android:label="关于我们"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.haa_roh.ui.my.SettingsFragment"
+        android:label="设置" />
 </navigation>

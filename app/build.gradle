@@ -46,6 +46,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -71,4 +73,7 @@ dependencies {
 
     //解决 Cannot fit requested classes in a single dex file (# methods: 77839 > 65536)
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    //图片圆形化
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

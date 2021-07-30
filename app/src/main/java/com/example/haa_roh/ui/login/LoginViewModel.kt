@@ -26,21 +26,6 @@ class LoginViewModel : BaseViewModel() {
     private val _loginCountNumber = MutableLiveData<CountChange?>()
     val loginCountNumber : LiveData<CountChange?> = _loginCountNumber
 
-    /*
-    (private val loginRepository: LoginRepository)
-    //向外部暴漏的login方法,执行点击登录按钮后的操作，并将结果通过LiveData传递到Activity
-    fun login(username: String, password: String) {
-        // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
-
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
-        }
-    }
-     */
     //向外部 暴露 的loginDataChanged方法,当登录状态发生改变后 判断用户名或密码是否合法
     fun loginDataChanged(phone: String, password : String) {
         if (!isValidPhoneNumber(phone)) {

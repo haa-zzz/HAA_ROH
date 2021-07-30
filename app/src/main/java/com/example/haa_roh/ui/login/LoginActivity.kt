@@ -9,6 +9,7 @@ import com.example.haa_roh.R
 import com.example.haa_roh.R.color.*
 import com.example.haa_roh.base.BaseActivity
 import com.example.haa_roh.databinding.ActivityLoginBinding
+import com.example.haa_roh.db.INPUTRIGHT
 import com.example.haa_roh.db.NOTFWTHEAUTOCODE
 import com.example.haa_roh.util.afterTextChanged
 
@@ -54,6 +55,8 @@ class LoginActivity : BaseActivity() {
             val loginAutoCode = it ?: return@Observer
             if( loginAutoCode.error != null ){
                 Toast.makeText(this,"发送失败",Toast.LENGTH_LONG).show()
+            }else{
+                login.isEnabled = true
             }
         })
         loginViewModel.loginCountNumber.observe(this, Observer {
@@ -93,7 +96,7 @@ class LoginActivity : BaseActivity() {
                         authCode.isEnabled = loginState.isUserNameValid
                         authCode.setBackgroundResource(R.color.authCode)
                     }
-                login.isEnabled = loginState.isUserNameValid && loginState.isPasswordValid
+                INPUTRIGHT = loginState.isUserNameValid && loginState.isPasswordValid
             }
         })
     }
@@ -101,14 +104,23 @@ class LoginActivity : BaseActivity() {
     private fun initVerifyData() {
 
         login.setOnClickListener{
-            //点击登录后设置 等待 可见
-            loading.visibility = View.VISIBLE
-            loginViewModel.loginVerificationResult(phone.text.toString().trim(),
-                code.text.toString().trim())
+            if(!INPUTRIGHT){
+                showErrorToast(this,getString(R.string.inputError))
+                return@setOnClickListener
+            }else{
+                //点击登录后设置 等待 可见
+                loading.visibility = View.VISIBLE
+                loginViewModel.loginVerificationResult(phone.text.toString().trim(),
+                    code.text.toString().trim())
+            }
         }
-
         loginViewModel.loginResult.observe(this, Observer {
-
+            val result = it ?: return@Observer
+            if(result.success){
+                showSuccessToast(this,"登录成功")
+            }else{
+                showErrorToast(this,getString(R.string.sendAutoCodeError))
+            }
         })
     }
 
