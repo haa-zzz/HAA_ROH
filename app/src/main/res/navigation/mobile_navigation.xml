@@ -3,36 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_plan">
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_plan"
         android:name="com.example.haa_roh.ui.plan.PlanFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_plan"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_diary"
         android:name="com.example.haa_roh.ui.diary.DiaryFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_diary"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_share"
         android:name="com.example.haa_roh.ui.share.ShareFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_diary"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_advice"
-        android:name="com.example.haa_roh.ui.my.adviceFragment"
+        android:name="com.example.haa_roh.ui.my.advice.adviceFragment"
         android:label="吐个槽"
         tools:layout="@layout/fragment_advice" />
     <fragment
         android:id="@+id/navigation_about"
-        android:name="com.example.haa_roh.ui.my.aboutFragment"
+        android:name="com.example.haa_roh.ui.my.about.aboutFragment"
         android:label="关于我们"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.haa_roh.ui.my.SettingsFragment"
+        android:name="com.example.haa_roh.ui.my.setting.SettingsFragment"
         android:label="设置" />
+    <fragment
+        android:id="@+id/navigation_edit"
+        android:name="com.example.haa_roh.ui.my.edit.My_Edit_Fragment"
+        android:label="编辑个人资料"
+        tools:layout="@layout/my__edit__fragment" />
 </navigation>

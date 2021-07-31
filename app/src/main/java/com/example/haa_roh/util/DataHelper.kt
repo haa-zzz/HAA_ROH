@@ -1,16 +1,20 @@
 package com.example.haa_roh.util
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import com.example.haa_roh.R
-import com.example.haa_roh.bean.uiBean.CountChange
+import com.example.haa_roh.bean.CountChange
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-
+import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
+
 
 /**
 匹配是否是手机号
@@ -60,5 +64,26 @@ fun oneMinuteCountdown(loginCountNumber : MutableLiveData<CountChange?>) {
                 loginCountNumber.value = countChange
             }
         })
+}
 
+/**
+ * Base64编码
+ */
+fun base64Encode(bitmap : Bitmap) : String{
+    val baos = ByteArrayOutputStream()
+    //读取图片到ByteArrayOutputStream
+    //读取图片到ByteArrayOutputStream
+    bitmap.compress(Bitmap.CompressFormat.PNG, 40, baos) //参数如果为100那么就不压缩
+
+    val bytes : ByteArray = baos.toByteArray()
+    val encode : String = Base64.encodeToString(bytes,Base64.DEFAULT)
+    return encode
+}
+
+/**
+ * Base64解码
+ */
+fun base64Decode(photoString : String) : Bitmap{
+    val input = Base64.decode(photoString,Base64.DEFAULT)
+    return BitmapFactory.decodeByteArray(input,0,input.size)
 }

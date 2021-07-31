@@ -6,10 +6,11 @@ import java.io.File
 
 class Users : BmobObject() {
 
+    var id: String? = null
     var username: String? = null
     var phone : String? = null
-    var photo : BmobFile? = null
+    var photoBase64 : String? = null
     var status : String? = null
-    var id: String? = null
+
    // var photo: File? = null
 }

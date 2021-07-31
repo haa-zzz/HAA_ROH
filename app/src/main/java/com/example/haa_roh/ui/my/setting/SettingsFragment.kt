@@ -1,4 +1,4 @@
-package com.example.haa_roh.ui.my
+package com.example.haa_roh.ui.my.setting
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat

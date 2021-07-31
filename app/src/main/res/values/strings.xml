@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HAA_ROH</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_plan">计划</string>
+    <string name="title_diary">归档</string>
+    <string name="title_share">共享空间</string>
     <!-- Strings related to login -->
     <string name="prompt_email">请输入手机号</string>
     <string name="prompt_password">请输入验证码</string>
@@ -38,4 +38,8 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="head_defult">学习使我快乐学习使我快</string>
     <string name="head_usernameDefault">Tony Red</string>
+    <string name="title_advice">建议与反馈</string>
+    <string name="title_about">关于我们</string>
+    <string name="title_setting">设置</string>
+    <string name="title_edit">个人资料</string>
 </resources>

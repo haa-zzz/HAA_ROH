@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.haa_roh.R
 import com.example.haa_roh.base.BaseViewModel
-import com.example.haa_roh.bean.uiBean.*
+import com.example.haa_roh.bean.*
 import com.example.haa_roh.repository.bMobSMS
 import com.example.haa_roh.repository.bMobSMSVerify
 import com.example.haa_roh.util.isValidPassword
@@ -12,7 +12,6 @@ import com.example.haa_roh.util.isValidPhoneNumber
 class LoginViewModel : BaseViewModel() {
 
     //使ViewModel只对观察者暴露不可修改的LiveData对象
-
     //监测输入状态改变：
     private val loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = loginForm
@@ -25,6 +24,10 @@ class LoginViewModel : BaseViewModel() {
     //监测倒计时
     private val _loginCountNumber = MutableLiveData<CountChange?>()
     val loginCountNumber : LiveData<CountChange?> = _loginCountNumber
+
+//    //监测用户创建是否成功
+//    private val _queryUser = MutableLiveData<CreateUserResult>()
+//    val queryUser : LiveData<CreateUserResult> = _queryUser
 
     //向外部 暴露 的loginDataChanged方法,当登录状态发生改变后 判断用户名或密码是否合法
     fun loginDataChanged(phone: String, password : String) {
@@ -45,5 +48,9 @@ class LoginViewModel : BaseViewModel() {
     fun loginVerificationResult(phone : String , code : String){
         bMobSMSVerify(phone,code,_loginResult)
     }
+//    //添加用户到数据库
+//    fun addDataUser(phone : String){
+//        addUser(phone,_queryUser)
+//    }
 
 }

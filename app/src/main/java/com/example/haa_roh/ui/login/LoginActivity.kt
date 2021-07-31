@@ -46,6 +46,7 @@ class LoginActivity : BaseActivity() {
         initAuthCodeData()
         initVerifyData()
     }
+
     private fun initAuthCodeData() {
         authCode.setOnClickListener{
             NOTFWTHEAUTOCODE = false
@@ -118,6 +119,7 @@ class LoginActivity : BaseActivity() {
             val result = it ?: return@Observer
             if(result.success){
                 showSuccessToast(this,"登录成功")
+
             }else{
                 showErrorToast(this,getString(R.string.sendAutoCodeError))
             }
