@@ -6,6 +6,10 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.example.haa_roh.bean.room.PersonalInformation
 
+/**
+ * Room中的增删改查操作都要现在这里定义相关函数
+ * 参考：[https://zhuanlan.zhihu.com/p/77036077]
+ */
 @Dao
 interface PerInfDao {
     //添加数据

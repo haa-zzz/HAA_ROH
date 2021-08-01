@@ -9,6 +9,11 @@ import com.example.haa_roh.repository.bMobSMS
 import com.example.haa_roh.repository.bMobSMSVerify
 import com.example.haa_roh.util.isValidPassword
 import com.example.haa_roh.util.isValidPhoneNumber
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 登录组件对应的ViewModel
+ */
 class LoginViewModel : BaseViewModel() {
 
     //使ViewModel只对观察者暴露不可修改的LiveData对象
@@ -25,9 +30,6 @@ class LoginViewModel : BaseViewModel() {
     private val _loginCountNumber = MutableLiveData<CountChange?>()
     val loginCountNumber : LiveData<CountChange?> = _loginCountNumber
 
-//    //监测用户创建是否成功
-//    private val _queryUser = MutableLiveData<CreateUserResult>()
-//    val queryUser : LiveData<CreateUserResult> = _queryUser
 
     //向外部 暴露 的loginDataChanged方法,当登录状态发生改变后 判断用户名或密码是否合法
     fun loginDataChanged(phone: String, password : String) {
@@ -48,9 +50,5 @@ class LoginViewModel : BaseViewModel() {
     fun loginVerificationResult(phone : String , code : String){
         bMobSMSVerify(phone,code,_loginResult)
     }
-//    //添加用户到数据库
-//    fun addDataUser(phone : String){
-//        addUser(phone,_queryUser)
-//    }
 
 }

@@ -16,8 +16,13 @@ import java.io.ByteArrayOutputStream
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
-
 /**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 一些Data相关的帮助类
+ */
+
+/*
 匹配是否是手机号
  */
 fun isValidPhoneNumber(phoneNumber: String?): Boolean {
@@ -25,7 +30,7 @@ fun isValidPhoneNumber(phoneNumber: String?): Boolean {
         Pattern.matches("^1[3-9]\\d{9}$", phoneNumber)
     } else false
 }
-/**
+/*
  * 匹配是否是手机验证码【6位数字】
  */
 fun isValidPassword(password : String?) : Boolean{
@@ -34,7 +39,7 @@ fun isValidPassword(password : String?) : Boolean{
     }else false
 }
 
-/**
+/*
  * 验证码：一分钟倒计时
  * 使用Rxjava实现
  */
@@ -67,7 +72,7 @@ fun oneMinuteCountdown(loginCountNumber : MutableLiveData<CountChange?>) {
         })
 }
 
-/**
+/*
  * Base64编码
  */
 fun base64Encode(bitmap : Bitmap) : String{
@@ -81,7 +86,7 @@ fun base64Encode(bitmap : Bitmap) : String{
     return encode
 }
 
-/**
+/*
  * Base64解码
  */
 fun base64Decode(photoString : String) : Bitmap{
@@ -89,7 +94,7 @@ fun base64Decode(photoString : String) : Bitmap{
     return BitmapFactory.decodeByteArray(input,0,input.size)
 }
 
-/**
+/*
  * 初始化时默认的username ，在向BMob添加数据时用到
  */
 fun getDefaultUserName(phone: String): String {

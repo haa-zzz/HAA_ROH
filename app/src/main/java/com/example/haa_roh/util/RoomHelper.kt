@@ -10,7 +10,9 @@ import com.example.haa_roh.db.room.PersonalDatabase
 /**
  * author : Haa-zzz
  * time : 2021/8/1
- * Room的增删改查操作都放在这里统一管理
+ *
+ * Room的增删改查操作都放在这里统一管理，
+ * 添加数据时需要在子线程进行。而查询数据时直接返回的是[LiveData]实例，在内部帮我们处理了线程问题
  */
 private val perInfDao : PerInfDao = PersonalDatabase.getInstance(BaseApplication.getContext()).perInfDao()
 

@@ -8,7 +8,13 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.EditText
 
+
 /**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 一些UI相关的帮助类
+ */
+/*
     监听EditView改变
  */
 fun EditText.afterTextChanged(afterTextChanged : (String) -> Unit) {
@@ -22,7 +28,7 @@ fun EditText.afterTextChanged(afterTextChanged : (String) -> Unit) {
     })
 }
 
-/**
+/*
  * 动态修改标题栏的颜色
  *
  * @param activity   Activity
@@ -43,7 +49,7 @@ fun setWindowStatusBarColor(activity: Activity, colorResId: Int) {
     }
 }
 
-/**
+/*
   打印：
  */
 fun LOGGED(str : String){

@@ -1,9 +1,11 @@
 package com.example.haa_roh.bean.Bmob
 
 import cn.bmob.v3.BmobObject
-import cn.bmob.v3.datatype.BmobFile
-import java.io.File
 
+
+/**
+ * BMob的基类，需要集成自[BmobObject]
+ */
 class Users : BmobObject() {
 
     var id: String? = null

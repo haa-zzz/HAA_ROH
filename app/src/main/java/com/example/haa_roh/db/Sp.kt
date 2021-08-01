@@ -3,6 +3,19 @@ package com.example.haa_roh.db
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.haa_roh.base.BaseApplication.Companion.getContext
+
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ *
+ * 使用 SharePreferences 来存储登录状态 和 登录的phone
+ *
+ * isLogin 用于判断是进入LoginActivity,还是直接跳转到主页面
+ * phone 用于后面从Room或者BMob中获取数据使用
+ *
+ * [saveToSp]会在按下登录按钮，通过BMob验证成功后调用
+ *
+ */
 //第一步：获取Sharedpreferences对象
 val sharedPreferences: SharedPreferences = getContext().getSharedPreferences("hor", MODE_PRIVATE)
 fun saveToSp( phone : String , isLogin : Boolean){

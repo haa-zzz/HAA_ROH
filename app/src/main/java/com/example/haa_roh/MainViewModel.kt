@@ -12,6 +12,11 @@ import com.example.haa_roh.util.LOGGED
 import com.example.haa_roh.util.addDataToRoom
 import com.example.haa_roh.util.getDataFromRoom
 
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * MainActivity对应的ViewModel
+ */
 class MainViewModel : BaseViewModel() {
 
     //接收Room数据库的LiveData

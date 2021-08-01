@@ -4,6 +4,12 @@ import com.example.haa_roh.R
 import com.example.haa_roh.bean.Bmob.Users
 import com.example.haa_roh.bean.room.PersonalInformation
 
+/**
+ * author: haa-zzz
+ * time: 2021-7-27
+ * [LoginActivity]中 LiveData 用到的数据类
+ */
+
 data class CountChange(var textCountNumber : String? = null,
                        var textColor : Int = (R.color.authCodeAfter),
                        var isEnable : Boolean = false )
@@ -20,9 +26,7 @@ data class LoginResult(
     val error: String? = null
 )
 
-/**
- * author: haa-zzz
- * time: 2021-7-27
+/*
  * LiveData中用来判断登录状态的bean
  */
 data class LoginFormState(

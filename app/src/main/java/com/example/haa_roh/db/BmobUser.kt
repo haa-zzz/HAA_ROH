@@ -17,6 +17,10 @@ import com.example.haa_roh.util.getDefaultUserName
  *
  * 如果添加成功，把数据写进Room中，传送成功的标志
  * 如果添加失败，传输失败的标志
+ *
+ *
+ * 遇到的问题：直接在done中把数据添加到Room中出现异常，因为 BMob的查询操作是异步线程,同样在这里面不知直接拿到数据，
+ * 解决思路：通过LiVeData把数据传出，同时解决传数据和线程切换的问题
  */
 fun addUser(phone: String, userData : MutableLiveData<DataResult>){
     val user  = Users()

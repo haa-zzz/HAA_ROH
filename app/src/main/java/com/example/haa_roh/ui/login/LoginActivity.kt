@@ -16,6 +16,11 @@ import com.example.haa_roh.db.INPUTRIGHT
 import com.example.haa_roh.db.NOTFWTHEAUTOCODE
 import com.example.haa_roh.util.afterTextChanged
 
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 登录组件，集成BMob完成短信验证登录功能，使用 ViewBind+ViewModel实现
+ */
 class LoginActivity : BaseActivity() {
     private lateinit var binding : ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
@@ -32,10 +37,14 @@ class LoginActivity : BaseActivity() {
         initView()
         initData()
     }
+    /*
+        overridePendingTransition(0, 0)用来取消跳转动画
+   */
     private fun isStartLogin() {
         if( querySpIsLogin() ){
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
             finish()
         }
     }

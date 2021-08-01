@@ -9,6 +9,12 @@ import com.example.haa_roh.bean.*
 import com.example.haa_roh.db.saveToSp
 import com.example.haa_roh.util.oneMinuteCountdown
 
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 短信验证码请求 以及 验证 功能
+ * 在发送短信验证码成功后开启倒计时功能
+ */
 fun bMobSMS(phoneNumber : String, loginGetAutoCode : MutableLiveData<LoginAutoCode>,
             loginCountNumber : MutableLiveData<CountChange?>) {
 

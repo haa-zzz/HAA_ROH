@@ -19,7 +19,18 @@ import com.example.haa_roh.databinding.MyHeadBinding
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
+/**
+ * author : Haa-zzz
+ * time : 2021/8/1
+ * 主页面，使用 BottomNavigationView + navigationView实现
+ * 两个使用同一个Navigation,当是左边菜单时，设置底部导航栏不可见
+ *
+ * 初始化数据时 [initData]主要是从Room中获取个人信息，如果获取不到再从 BMob中获取,然后把数据写进Room,
+ * 用Room查询时返回的LiveData来监听数据，并通过DataBind设置数据
+ *
+ * headBing 实例的获取： 首先通过[ActivityMainBinding]获取到 headerLayout对应的View,
+ * 然后通过MyHeadBinding.bind(view)拿到实例
+ */
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -62,7 +73,6 @@ class MainActivity : BaseActivity() {
 
         mainViewModel.getInitInformation().observe(this, {
             if (it == null) {
-                showErrorToast(this, "监测到数据库为空")
                 mainViewModel.getPIFromBMob()
             }else{
                 headBinding.apply {
@@ -75,7 +85,7 @@ class MainActivity : BaseActivity() {
         mainViewModel.bMobResult.observe(this, {
             val result = it ?: return@observe
             if (result.success) {
-                mainViewModel.addPIToRoom(result.personalInformation)
+                with(mainViewModel) { addPIToRoom(result.personalInformation) }
             } else {
                 showErrorToast(this, "获取数据失败，请检查网络连接")
             }
