@@ -1,13 +1,16 @@
 package com.example.haa_roh.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.haa_roh.MainActivity
 import com.example.haa_roh.R
 import com.example.haa_roh.R.color.*
 import com.example.haa_roh.base.BaseActivity
+import com.example.haa_roh.db.querySpIsLogin
 import com.example.haa_roh.databinding.ActivityLoginBinding
 import com.example.haa_roh.db.INPUTRIGHT
 import com.example.haa_roh.db.NOTFWTHEAUTOCODE
@@ -25,8 +28,16 @@ class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isStartLogin()
         initView()
         initData()
+    }
+    private fun isStartLogin() {
+        if( querySpIsLogin() ){
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
     private fun initView() {
         //获取ViewBinding
@@ -119,7 +130,9 @@ class LoginActivity : BaseActivity() {
             val result = it ?: return@Observer
             if(result.success){
                 showSuccessToast(this,"登录成功")
-
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }else{
                 showErrorToast(this,getString(R.string.sendAutoCodeError))
             }

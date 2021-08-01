@@ -32,7 +32,7 @@ data class LoginFormState(
     val isPasswordValid : Boolean = false
 )
 
-data class CreateUserResult(
+data class DataResult(
     val success: Boolean = false,
     val error: String? = null,
     val personalInformation : PersonalInformation? = null

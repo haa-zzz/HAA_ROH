@@ -6,7 +6,7 @@ import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.QueryListener
 import cn.bmob.v3.listener.UpdateListener
 import com.example.haa_roh.bean.*
-import com.example.haa_roh.db.queryUser
+import com.example.haa_roh.db.saveToSp
 import com.example.haa_roh.util.oneMinuteCountdown
 
 fun bMobSMS(phoneNumber : String, loginGetAutoCode : MutableLiveData<LoginAutoCode>,

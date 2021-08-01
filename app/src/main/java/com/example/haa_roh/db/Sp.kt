@@ -1,4 +1,4 @@
-package com.example.haa_roh.bean
+package com.example.haa_roh.db
 
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences

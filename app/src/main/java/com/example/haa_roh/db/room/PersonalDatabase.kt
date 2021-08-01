@@ -5,8 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.haa_roh.bean.room.PersonalInformation
-
-
 @Database(entities = [PersonalInformation::class],version = 1)
 abstract class PersonalDatabase :  RoomDatabase(){
 
@@ -19,7 +17,7 @@ abstract class PersonalDatabase :  RoomDatabase(){
         fun getInstance(context: Context): PersonalDatabase {
             if (databaseInstance == null) {
                 databaseInstance = Room.databaseBuilder(
-                    context.getApplicationContext(),
+                    context,
                     PersonalDatabase::class.java,
                     "personal"
                 )

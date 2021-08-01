@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import com.example.haa_roh.R
+import com.example.haa_roh.base.BaseApplication
 import com.example.haa_roh.bean.CountChange
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -86,4 +87,20 @@ fun base64Encode(bitmap : Bitmap) : String{
 fun base64Decode(photoString : String) : Bitmap{
     val input = Base64.decode(photoString,Base64.DEFAULT)
     return BitmapFactory.decodeByteArray(input,0,input.size)
+}
+
+/**
+ * 初始化时默认的username ，在向BMob添加数据时用到
+ */
+fun getDefaultUserName(phone: String): String {
+    return BaseApplication.getContext().getString(R.string.userId)+phone
+}
+fun getDefaultPhoto(): String {
+//    //1.找到BitmapFactory实例
+//    val options = BitmapFactory.Options()
+//    //2.设置inJustDecodeBounds参数为True
+//    options.inJustDecodeBounds = true
+//    //3.得到BitmapFactory加载进来的图片
+    val bitmap = BitmapFactory.decodeResource(BaseApplication.getContext().resources, R.drawable.pohdefult)
+    return base64Encode(bitmap)
 }
