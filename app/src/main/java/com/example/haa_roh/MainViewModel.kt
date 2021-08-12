@@ -6,11 +6,11 @@ import com.example.haa_roh.base.BaseViewModel
 import com.example.haa_roh.bean.DataResult
 import com.example.haa_roh.db.querySpNumber
 import com.example.haa_roh.bean.room.PersonalInformation
+import com.example.haa_roh.db.PHONEMES
 
 import com.example.haa_roh.db.queryUser
-import com.example.haa_roh.util.LOGGED
-import com.example.haa_roh.util.addDataToRoom
-import com.example.haa_roh.util.getDataFromRoom
+import com.example.haa_roh.db.room.addDataToRoom
+import com.example.haa_roh.db.room.getDataFromRoom
 
 /**
  * author : Haa-zzz
@@ -29,7 +29,7 @@ class MainViewModel : BaseViewModel() {
      * 从BMob获取数据
      */
     fun getPIFromBMob(){
-        val number = querySpNumber() ?: return
+        val number = PHONEMES ?:querySpNumber() ?: return
         queryUser(number,_bMobResult)
     }
     /*

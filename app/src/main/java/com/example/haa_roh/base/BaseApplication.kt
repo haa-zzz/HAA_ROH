@@ -18,7 +18,7 @@ class BaseApplication : Application(){
     }
     private fun initBnob() {
         //第一：默认初始化
-        Bmob.initialize(this, "8ab0a0394d051a4a51dba5c4280ae64d")
+        Bmob.initialize(this, "b56e6d6a0c1f351f1bfe18205684713d")
         // 注:自v3.5.2开始，数据sdk内部缝合了统计sdk，开发者无需额外集成，传渠道参数即可，不传默认没开启数据统计功能
         //Bmob.initialize(this, "Your Application ID","bmob");
     }

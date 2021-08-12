@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.haa_roh.base.BaseFragment
-import com.example.haa_roh.databinding.FragmentDashboardBinding
+import com.example.haa_roh.databinding.FragmentDiaryBinding
 
 class DiaryFragment : BaseFragment() {
 
     private lateinit var planViewModel: DiaryViewModel
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentDiaryBinding? = null
 
     private val binding get() = _binding!!
 
@@ -23,7 +23,7 @@ class DiaryFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         planViewModel = ViewModelProvider(this).get(DiaryViewModel::class.java)
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentDiaryBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val textView: TextView = binding.textDashboard
         planViewModel.text.observe(viewLifecycleOwner, Observer {

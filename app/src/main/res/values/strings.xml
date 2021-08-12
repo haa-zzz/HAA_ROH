@@ -42,4 +42,12 @@
     <string name="title_about">关于我们</string>
     <string name="title_setting">设置</string>
     <string name="title_edit">个人资料</string>
+    <string name="plan_createText">创建新的计划</string>
+    <string name="plan_editText">快速创建计划</string>
+    <string name="plan_ToBeCompletedText">今天的计划</string>
+    <string name="plan_CompletedText">已完成</string>
+    <string name="plan_CreateAffirm">确认</string>
+    <string name="icon_sure"></string>
+    <string name="icon_return"></string>
+    <string name="edit">快点编辑吧</string>
 </resources>

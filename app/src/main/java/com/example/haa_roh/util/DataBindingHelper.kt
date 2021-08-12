@@ -2,6 +2,11 @@ package com.example.haa_roh.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.RecyclerView
+import com.example.haa_roh.bean.room.PlanRoom
+import com.example.haa_roh.ui.adapter.PlanAdapter
+import okhttp3.internal.notify
 
 /**
  * author : Haa-zzz
@@ -15,3 +20,17 @@ fun loadImage(imageView: ImageView?, base64Image : String?) {
         imageView?.setImageBitmap(bitmap)
     }
 }
+/**
+ * author : Haa-zzz
+ * time : 2021/8/2
+ * 处理RecyclerView，直接传入list,通过这里来适配到对应的Adapter
+ */
+
+//@BindingAdapter("recyclerViewList")
+//fun loadRecyclerView(recyclerView: RecyclerView?, list: ObservableArrayList<PlanRoom>?) {
+//
+//    if(list != null && !list.isEmpty() ){
+//        val arraylist = list.toMutableList() as ArrayList<PlanRoom>
+//        recyclerView?.adapter = PlanAdapter(arraylist)
+//    }
+//}

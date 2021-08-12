@@ -1,11 +1,11 @@
-package com.example.haa_roh.util
+package com.example.haa_roh.db.room
 
 import androidx.lifecycle.LiveData
 import com.example.haa_roh.base.BaseApplication
 import com.example.haa_roh.bean.room.PersonalInformation
+import com.example.haa_roh.bean.room.PlanRoom
+import com.example.haa_roh.db.PHONEMES
 import com.example.haa_roh.db.querySpNumber
-import com.example.haa_roh.db.room.PerInfDao
-import com.example.haa_roh.db.room.PersonalDatabase
 
 /**
  * author : Haa-zzz
@@ -16,9 +16,12 @@ import com.example.haa_roh.db.room.PersonalDatabase
  */
 private val perInfDao : PerInfDao = PersonalDatabase.getInstance(BaseApplication.getContext()).perInfDao()
 
+private val planDao :PlanDao = PlanDatabase.getInstance(BaseApplication.getContext()).planDao()
+
+private val number =  PHONEMES ?: querySpNumber()
 //根据number来query数据
 fun getDataFromRoom() : LiveData<PersonalInformation>?{
-    val number  = querySpNumber() ?: return null
+     number ?: return null
     return perInfDao.queryPersonalByNumber(number)
 }
 //添加数据
@@ -26,4 +29,16 @@ fun addDataToRoom(personalInformation : PersonalInformation){
     Thread {
         perInfDao.insertPersonal(personalInformation)
     }.start()
+}
+
+//向Plan中添加数据
+fun addPlanToRoom(planRoom : PlanRoom){
+    Thread {
+        planDao.insertPlan(planRoom)
+    }.start()
+}
+//向plan中查询数据
+fun queryPlanFromRoom() : LiveData<List<PlanRoom>>?{
+    number  ?: return null
+    return planDao.queryPlanByNumber(number)
 }

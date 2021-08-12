@@ -75,15 +75,14 @@ fun oneMinuteCountdown(loginCountNumber : MutableLiveData<CountChange?>) {
 /*
  * Base64编码
  */
-fun base64Encode(bitmap : Bitmap) : String{
+fun base64Encode(bitmap: Bitmap): String {
     val baos = ByteArrayOutputStream()
     //读取图片到ByteArrayOutputStream
     //读取图片到ByteArrayOutputStream
     bitmap.compress(Bitmap.CompressFormat.PNG, 40, baos) //参数如果为100那么就不压缩
 
-    val bytes : ByteArray = baos.toByteArray()
-    val encode : String = Base64.encodeToString(bytes,Base64.DEFAULT)
-    return encode
+    val bytes: ByteArray = baos.toByteArray()
+    return Base64.encodeToString(bytes, Base64.DEFAULT)
 }
 
 /*

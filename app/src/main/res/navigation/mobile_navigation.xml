@@ -8,12 +8,24 @@
         android:id="@+id/navigation_plan"
         android:name="com.example.haa_roh.ui.plan.PlanFragment"
         android:label="@string/title_plan"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_plan" >
+        <action
+            android:id="@+id/action_navigation_plan_to_richEditView"
+            app:destination="@id/navigation_richEditView" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            />
+        <argument
+            android:name="tag"
+            app:argType="string" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_diary"
         android:name="com.example.haa_roh.ui.diary.DiaryFragment"
         android:label="@string/title_diary"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_diary" />
 
     <fragment
         android:id="@+id/navigation_share"
@@ -40,4 +52,11 @@
         android:name="com.example.haa_roh.ui.my.edit.My_Edit_Fragment"
         android:label="编辑个人资料"
         tools:layout="@layout/my__edit__fragment" />
+    <fragment
+        android:id="@+id/navigation_richEditView"
+        android:name="com.example.haa_roh.ui.plan.RichEditView"
+        android:label="rich_edit_view_fragment"
+        tools:layout="@layout/rich_edit" >
+
+    </fragment>
 </navigation>

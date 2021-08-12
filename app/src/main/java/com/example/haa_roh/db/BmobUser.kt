@@ -1,14 +1,17 @@
 package com.example.haa_roh.db
+
 import androidx.lifecycle.MutableLiveData
 import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.SaveListener
+import com.example.haa_roh.bean.Bmob.PlanAdapterBean
 import com.example.haa_roh.bean.Bmob.Users
 import com.example.haa_roh.bean.DataResult
+import com.example.haa_roh.bean.ResultData
 import com.example.haa_roh.bean.room.PersonalInformation
-import com.example.haa_roh.util.LOGGED
-import com.example.haa_roh.util.addDataToRoom
+import com.example.haa_roh.bean.room.PlanRoom
+import com.example.haa_roh.db.room.addPlanToRoom
 import com.example.haa_roh.util.getDefaultPhoto
 import com.example.haa_roh.util.getDefaultUserName
 
@@ -22,15 +25,15 @@ import com.example.haa_roh.util.getDefaultUserName
  * 遇到的问题：直接在done中把数据添加到Room中出现异常，因为 BMob的查询操作是异步线程,同样在这里面不知直接拿到数据，
  * 解决思路：通过LiVeData把数据传出，同时解决传数据和线程切换的问题
  */
-fun addUser(phone: String, userData : MutableLiveData<DataResult>){
-    val user  = Users()
-    user.photoBase64 =  getDefaultPhoto()
+fun addUser(phone: String, userData: MutableLiveData<DataResult>) {
+    val user = Users()
+    user.photoBase64 = getDefaultPhoto()
     user.username = getDefaultUserName(phone)
     user.phone = phone
     user.status = null
-    user.save(object : SaveListener<String>(){
+    user.save(object : SaveListener<String>() {
         override fun done(objectId: String?, e: BmobException?) {
-            if(e == null){
+            if (e == null) {
                 val personalInformation = PersonalInformation(
                     number = phone,
                     username = user.username,
@@ -38,9 +41,9 @@ fun addUser(phone: String, userData : MutableLiveData<DataResult>){
                     photo = user.photoBase64,
                     id = objectId
                 )
-                userData.value = DataResult(success = true,personalInformation = personalInformation)
-            }else{
-                LOGGED("从BMob添加数据就直接给返回错误了  ${e.errorCode}     ${e.toString()}")
+                userData.value =
+                    DataResult(success = true, personalInformation = personalInformation)
+            } else {
                 userData.value = DataResult(error = e.toString())
             }
         }
@@ -51,22 +54,19 @@ fun addUser(phone: String, userData : MutableLiveData<DataResult>){
  * BMob查询用户
  *
  * 首先在Room中查询，如果Room中查询不到，再调用这个方法区BMob中查询
- * 如果查询成功，但是没有数据，说明是新用户，需要调用[addUser]去添加新用户
  * 如果查询成功且有数据，直接把数据写进Room，并通过LiveData返回一个查询成功的标志
- * 如果查询失败，通过LiveData返回一个查询失败的标志
+ * 如果查询成功单没数据，就调用注册方法进行注册
+ * 如果查询失败，返回失败的标志
  */
-fun queryUser(phone: String, userData : MutableLiveData<DataResult>) {
-    LOGGED("开始查询数据了")
+fun queryUser(phone: String, userData: MutableLiveData<DataResult>) {
     val bMobQuery: BmobQuery<Users> = BmobQuery<Users>()
-    bMobQuery.addWhereEqualTo("phone",phone)
+    bMobQuery.addWhereEqualTo("phone", phone)
     bMobQuery.setLimit(1)
-    bMobQuery.findObjects(object : FindListener<Users>(){
+    bMobQuery.findObjects(object : FindListener<Users>() {
         override fun done(list: MutableList<Users>?, e: BmobException?) {
-            if(e == null){
-                if(list == null || list.size == 0){
-                    LOGGED("从BMob中查询数据了，是空的")
-                    addUser(phone,userData)
-                }else{
+
+            if (e == null) {
+                if(!(list == null || list.isEmpty())){
                     val personalInformation = PersonalInformation(
                         number = phone,
                         username = list[0].username,
@@ -74,11 +74,49 @@ fun queryUser(phone: String, userData : MutableLiveData<DataResult>) {
                         photo = list[0].photoBase64,
                         id = list[0].objectId
                     )
-                    userData.value = DataResult(success = true,personalInformation = personalInformation)
+                    userData.value =
+                        DataResult(success = true, personalInformation = personalInformation)
+                }else{
+                    addUser(phone, userData)
                 }
-            }else{
-                LOGGED("从BMob查询数据就直接给返回错误了")
+            } else {
                 userData.value = DataResult(error = e.toString())
+            }
+        }
+    })
+}
+
+/**
+ * 向BMob中添加每日计划，表中包含 title,tag,phone(用于标识用户信息),content(内容)
+ */
+fun addPlanToBMob(planBean: PlanAdapterBean, result : MutableLiveData<ResultData>){
+    planBean.save(object : SaveListener<String>(){
+        override fun done(t: String?, e: BmobException?) {
+            if (e == null) {
+                val planRoom = PlanRoom(number = planBean.phone,title = planBean.title,tag = planBean.tag,
+                    isFinish = planBean.isFinish,content = planBean.content)
+                addPlanToRoom(planRoom)
+                result.value = ResultData(success = true,planRoom = planRoom)
+            } else {
+                result.value = ResultData(error = e.toString())
+            }
+        }
+    })
+}
+
+fun queryPlanBMob(phone : String){
+    val bMobQuery: BmobQuery<PlanAdapterBean> = BmobQuery<PlanAdapterBean>()
+    bMobQuery.addWhereEqualTo("phone", phone)
+    bMobQuery.setLimit(50)
+    bMobQuery.findObjects(object : FindListener<PlanAdapterBean>() {
+        override fun done(list : MutableList<PlanAdapterBean>?, e: BmobException?) {
+            if(list != null){
+                //把BMob数据库中的数据添加到本地数据库
+                for(planBean in list ){
+                    val planRoom = PlanRoom(number = planBean.phone,title = planBean.title,tag = planBean.tag,
+                        isFinish = planBean.isFinish,content = planBean.content)
+                    addPlanToRoom(planRoom)
+                }
             }
         }
 

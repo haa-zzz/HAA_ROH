@@ -97,7 +97,7 @@ class MainActivity : BaseActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_plan
+                R.id.navigation_plan,R.id.navigation_diary,R.id.navigation_share
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -113,11 +113,19 @@ class MainActivity : BaseActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 //如果是做左边菜单，设置底部导航栏不可见
-                R.id.navigation_advice, R.id.navigation_about, R.id.navigation_settings -> {
+                R.id.navigation_richEditView ->{
                     navView.visibility = View.GONE
+                    binding.toolbar.visibility = View.GONE
+
+                }
+                R.id.navigation_advice, R.id.navigation_about, R.id.navigation_settings ->
+                {
+                    navView.visibility = View.GONE
+                    binding.toolbar.visibility = View.VISIBLE
                 }
                 else -> {
                     navView.visibility = View.VISIBLE
+                    binding.toolbar.visibility = View.VISIBLE
                 }
             }
         }

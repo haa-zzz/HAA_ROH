@@ -3,6 +3,7 @@ package com.example.haa_roh.bean
 import com.example.haa_roh.R
 import com.example.haa_roh.bean.Bmob.Users
 import com.example.haa_roh.bean.room.PersonalInformation
+import com.example.haa_roh.bean.room.PlanRoom
 
 /**
  * author: haa-zzz
@@ -40,4 +41,9 @@ data class DataResult(
     val success: Boolean = false,
     val error: String? = null,
     val personalInformation : PersonalInformation? = null
+)
+data class ResultData(
+    val success: Boolean = false,
+    val error: String? = null,
+    val planRoom : PlanRoom? = null
 )

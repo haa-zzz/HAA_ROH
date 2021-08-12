@@ -9,3 +9,11 @@ package com.example.haa_roh.db
 var NOTFWTHEAUTOCODE = true
 //手机号或验证码输入错误
 var INPUTRIGHT = false
+
+// 1表示完成
+var NOFINISH = 0
+// 2表示未完成
+var FINISHED = 1
+
+//从Sp中获取手机号放在这里，避免重复多次获取
+var  PHONEMES : String? = null

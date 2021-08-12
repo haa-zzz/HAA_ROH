@@ -34,8 +34,6 @@ fun retrofitGetAutoCode(phoneNumber : String) {
 //        })
 
 }
-
-
 private fun getOkHttpClient() : OkHttpClient {
     return OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
