@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HAA_ROH</string>
     <string name="title_plan">计划</string>
-    <string name="title_diary">归档</string>
+    <string name="title_diary">日常</string>
     <string name="title_share">共享空间</string>
     <!-- Strings related to login -->
     <string name="prompt_email">请输入手机号</string>
@@ -50,4 +50,9 @@
     <string name="icon_sure"></string>
     <string name="icon_return"></string>
     <string name="edit">快点编辑吧</string>
+    <string name="delete">删除</string>
+    <string name="sure">完成</string>
+    <string name="discover">历史上的今天</string>
+    <string name="report">您的今日报告</string>
+    <string name="saying">每天一句</string>
 </resources>

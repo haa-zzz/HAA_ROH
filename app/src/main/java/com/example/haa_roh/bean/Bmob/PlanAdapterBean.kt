@@ -9,3 +9,4 @@ class PlanAdapterBean(
     var phone : String? = null,
     var content: String? = null,
 ) : BmobObject()
+

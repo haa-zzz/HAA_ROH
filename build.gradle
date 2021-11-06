@@ -22,6 +22,7 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.jfrog.org/libs-snapshot" }
         maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.google.com' }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }

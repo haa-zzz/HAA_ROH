@@ -49,7 +49,7 @@ abstract class PersonalDatabase : RoomDatabase() {
         }
     }
 }
-@Database(entities = [PlanRoom::class], version = 2)
+@Database(entities = [PlanRoom::class], version = 4)
 abstract class PlanDatabase : RoomDatabase() {
     abstract fun planDao(): PlanDao
 

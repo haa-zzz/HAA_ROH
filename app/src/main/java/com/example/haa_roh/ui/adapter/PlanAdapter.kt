@@ -36,8 +36,15 @@ class PlanAdapter(private val list: ArrayList<PlanRoom>, private val callBack: R
         binding.title = list[position].title
 
         binding.root.setOnClickListener{
-            callBack.callBack( list[position].title, list[position].tag,list[position].content)
+            callBack.callBack(position)
         }
+        binding.itemDelete.setOnClickListener{
+            callBack.deleteClickBack(position,list[position].id)
+        }
+        binding.itemSure.setOnClickListener{
+            callBack.sureClickBack(position,list[position].id)
+        }
+
     }
     override fun getItemCount(): Int {
         return list.size

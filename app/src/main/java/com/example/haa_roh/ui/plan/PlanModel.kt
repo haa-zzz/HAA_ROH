@@ -6,10 +6,7 @@ import com.example.haa_roh.base.BaseViewModel
 import com.example.haa_roh.bean.Bmob.PlanAdapterBean
 import com.example.haa_roh.bean.ResultData
 import com.example.haa_roh.bean.room.PlanRoom
-import com.example.haa_roh.db.PHONEMES
-import com.example.haa_roh.db.addPlanToBMob
-import com.example.haa_roh.db.queryPlanBMob
-import com.example.haa_roh.db.querySpNumber
+import com.example.haa_roh.db.*
 import com.example.haa_roh.db.room.queryPlanFromRoom
 
 class PlanModel : BaseViewModel() {
@@ -19,6 +16,10 @@ class PlanModel : BaseViewModel() {
     val addPlanLiveData : LiveData<ResultData> = _addPlanLiveData
 
     private lateinit var queryPlanLiveData : LiveData<List<PlanRoom>>
+
+    private val _deletePlanLiveData = MutableLiveData<ResultData>()
+    val deletePlanLiveData : LiveData<ResultData> = _deletePlanLiveData
+
 
     //向未完成的里面添加新计划
     fun addToBeCompleted(title: String, tag: String) {
@@ -44,5 +45,9 @@ class PlanModel : BaseViewModel() {
     fun getAllTag() : Array<String> {
         //获取所有的标签
         return arrayOf("Android", "Kotlin", "Java")
+    }
+
+    fun deletePlan(id : String){
+        deletePlanBMob(id,_deletePlanLiveData)
     }
 }

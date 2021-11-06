@@ -2,7 +2,6 @@ package com.example.haa_roh.ui.plan
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.haa_roh.R
 import com.example.haa_roh.api.RecyclerViewCallBack
 import com.example.haa_roh.api.SlideRecyclerView
@@ -23,7 +21,10 @@ import com.example.haa_roh.databinding.FragmentPlanBinding
 import com.example.haa_roh.databinding.ItemAddplanBinding
 import com.example.haa_roh.ui.adapter.PlanAdapter
 import com.example.haa_roh.util.dialogBtw
+import com.example.haa_roh.util.printLog
 import com.haazzz.haabase.util.TAG
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PlanFragment : BaseFragment() {
 
@@ -72,21 +73,43 @@ class PlanFragment : BaseFragment() {
             list.addAll(it)
             adapter.notifyDataSetChanged()
         })
-    }
 
+        viewModel.deletePlanLiveData.observe(requireActivity(),{
+            val result = it ?: return@observe
+            if(result.error != null){
+                showSuccessToast(requireContext(),"删除成功")
+            }else{
+                showErrorToast(requireContext(),"删除失败")
+            }
+        })
+    }
     private fun initRecyclerView() {
 
         list = arrayListOf()
         adapter = PlanAdapter(list = list as ArrayList<PlanRoom>,object : RecyclerViewCallBack{
 
-
-            override fun callBack(title: String?, tag: String?, content: String?) {
-
+            override fun callBack(index: Int) {
                 val bundle = Bundle()
-                bundle.putString("title",title)
-                bundle.putString("tag",tag)
-                bundle.putString("content",content)
+                bundle.putString("title",list[index].title)
+                bundle.putString("tag",list[index].tag)
+                bundle.putString("content", list[index].content)
+                bundle.putString("id",list[index].id)
                 Navigation.findNavController(view!!).navigate(R.id.action_navigation_plan_to_richEditView,bundle)
+            }
+
+            override fun deleteClickBack(index: Int, id: String) {
+                list.removeAt(index)
+                recyclerView.closeMenu()
+                adapter.notifyDataSetChanged()
+                viewModel.deletePlan(id)
+
+            }
+            override fun sureClickBack(index: Int, id: String) {
+                val planRoom = list[index]
+                list.removeAt(index)
+                list.add(planRoom)
+                recyclerView.closeMenu()
+                adapter.notifyDataSetChanged()
             }
         })
         recyclerView =  binding.planToBeCompletedRecyclerView

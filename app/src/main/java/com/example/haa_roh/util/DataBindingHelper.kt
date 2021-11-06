@@ -1,9 +1,12 @@
 package com.example.haa_roh.util
 
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.haa_roh.base.BaseApplication.Companion.getContext
 import com.example.haa_roh.bean.room.PlanRoom
 import com.example.haa_roh.ui.adapter.PlanAdapter
 import okhttp3.internal.notify
@@ -20,6 +23,18 @@ fun loadImage(imageView: ImageView?, base64Image : String?) {
         imageView?.setImageBitmap(bitmap)
     }
 }
+
+
+@BindingAdapter("urlImage")
+fun loadUrlImage(imageView: ImageView?,url : String?){
+    if(imageView == null || url == null)
+        return
+
+    Glide.with(getContext())
+        .load(url)
+        .into(imageView)
+}
+
 /**
  * author : Haa-zzz
  * time : 2021/8/2

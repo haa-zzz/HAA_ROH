@@ -48,20 +48,20 @@ public class HAAItem extends ViewGroup {
         if (childCount == 0) {  //如果没有子元素
             setMeasuredDimension(0, 0);
         } else if (widthMode == MeasureSpec.AT_MOST && heightMode == MeasureSpec.AT_MOST) {//宽/高是否采取了wrap_content
-            Log.d("HAA_ZZZ", "onMeasure: "+ height);
+
             height = getChildAt(0).getMeasuredHeight();
             width = childCount * getChildAt(0).getMeasuredWidth();
             setMeasuredDimension(width, height);
         } else if (widthMode == MeasureSpec.AT_MOST) { //宽是否采取了wrap_content，是的话 宽是所有子元素之和
-            Log.d("HAA_ZZZ", "onMeasure1: "+ height);
+
             width = childCount * getChildAt(0).getMeasuredWidth();
             setMeasuredDimension(width, height);
         } else if(heightMode == MeasureSpec.AT_MOST){  //高是否采取wrap_content， 是的话 高是第一个元素的高
-            Log.d("HAA_ZZZ", "onMeasure:2 "+ height);
+
             height = getChildAt(0).getMeasuredHeight();
             setMeasuredDimension(width, height);
         }else{
-            Log.d("HAA_ZZZ", "onMeasure:3 "+ height);
+
             setMeasuredDimension(width, height);
         }
     }
@@ -72,7 +72,7 @@ public class HAAItem extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
             if(child.getVisibility() != View.GONE){
-                Log.d("HZZ_ZZZ", "onLayout: ");
+
                 child.layout(l + leftOffset, 0, r + leftOffset, child.getMeasuredHeight());
                 leftOffset += child.getMeasuredWidth();
             }

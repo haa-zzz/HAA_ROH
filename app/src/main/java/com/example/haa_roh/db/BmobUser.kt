@@ -5,6 +5,7 @@ import cn.bmob.v3.BmobQuery
 import cn.bmob.v3.exception.BmobException
 import cn.bmob.v3.listener.FindListener
 import cn.bmob.v3.listener.SaveListener
+import cn.bmob.v3.listener.UpdateListener
 import com.example.haa_roh.bean.Bmob.PlanAdapterBean
 import com.example.haa_roh.bean.Bmob.Users
 import com.example.haa_roh.bean.DataResult
@@ -12,8 +13,11 @@ import com.example.haa_roh.bean.ResultData
 import com.example.haa_roh.bean.room.PersonalInformation
 import com.example.haa_roh.bean.room.PlanRoom
 import com.example.haa_roh.db.room.addPlanToRoom
+import com.example.haa_roh.db.room.changePlanToRoom
+import com.example.haa_roh.db.room.deletePlanFromRoom
 import com.example.haa_roh.util.getDefaultPhoto
 import com.example.haa_roh.util.getDefaultUserName
+import com.example.haa_roh.util.printLog
 
 /**
  * BMob的添加用户
@@ -93,7 +97,7 @@ fun addPlanToBMob(planBean: PlanAdapterBean, result : MutableLiveData<ResultData
     planBean.save(object : SaveListener<String>(){
         override fun done(t: String?, e: BmobException?) {
             if (e == null) {
-                val planRoom = PlanRoom(number = planBean.phone,title = planBean.title,tag = planBean.tag,
+                val planRoom = PlanRoom(id = planBean.objectId, number = planBean.phone,title = planBean.title,tag = planBean.tag,
                     isFinish = planBean.isFinish,content = planBean.content)
                 addPlanToRoom(planRoom)
                 result.value = ResultData(success = true,planRoom = planRoom)
@@ -113,12 +117,38 @@ fun queryPlanBMob(phone : String){
             if(list != null){
                 //把BMob数据库中的数据添加到本地数据库
                 for(planBean in list ){
-                    val planRoom = PlanRoom(number = planBean.phone,title = planBean.title,tag = planBean.tag,
+                    val planRoom = PlanRoom(id = planBean.objectId,number = planBean.phone,title = planBean.title,tag = planBean.tag,
                         isFinish = planBean.isFinish,content = planBean.content)
                     addPlanToRoom(planRoom)
                 }
             }
         }
-
+    })
+}
+//修改数据
+fun setPlanBMob(id : String,planBean: PlanAdapterBean, result : MutableLiveData<ResultData>){
+    planBean.update(id,object : UpdateListener(){
+        override fun done(e: BmobException?) {
+            if(e == null){
+                result.value = ResultData(success = true)
+            }else{
+                result.value = ResultData(error = e.toString())
+            }
+        }
+    })
+}
+fun deletePlanBMob(id : String , result : MutableLiveData<ResultData>){
+    val planBean = PlanAdapterBean()
+  //  planBean.objectId = id
+    printLog(id)
+    planBean.delete(id , object : UpdateListener(){
+        override fun done(e: BmobException?) {
+            if(e == null){
+                deletePlanFromRoom(id)
+                result.value = ResultData(success = true)
+            }else{
+                result.value = ResultData(error = e.toString())
+            }
+        }
     })
 }

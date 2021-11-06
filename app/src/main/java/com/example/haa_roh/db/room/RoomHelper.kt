@@ -42,3 +42,16 @@ fun queryPlanFromRoom() : LiveData<List<PlanRoom>>?{
     number  ?: return null
     return planDao.queryPlanByNumber(number)
 }
+//plan中删除数据
+fun deletePlanFromRoom(id : String){
+    val planRoom = PlanRoom(id,null,null,null,null,null)
+    Thread{
+        planDao.deletePlan(planRoom)
+    }.start()
+}
+//plan修改数据
+fun changePlanToRoom(planRoom: PlanRoom){
+    Thread{
+        planDao.updatePlan(planRoom)
+    }.start()
+}

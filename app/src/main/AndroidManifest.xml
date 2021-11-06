@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.haa_roh">
     <!--允许联网 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,14 +15,18 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+
+
     <application
+        android:usesCleartextTraffic="true"
         android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HAA_ROH">
+        android:theme="@style/Theme.HAA_ROH"
+        tools:targetApi="m">
         <activity android:name=".ui.login.LoginActivity"
             android:launchMode="singleInstance">
             <intent-filter>

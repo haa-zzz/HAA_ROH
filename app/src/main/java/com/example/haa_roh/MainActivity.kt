@@ -1,6 +1,8 @@
 package com.example.haa_roh
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 
@@ -48,7 +50,6 @@ class MainActivity : BaseActivity() {
         initData()
         destinationChangedListener()
     }
-
     private fun initView() {
         //初始化ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -58,6 +59,8 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         //拿到navController
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main)
+
+
         initDrawer()
         initBNV()
     }
@@ -94,6 +97,7 @@ class MainActivity : BaseActivity() {
 
     private fun initDrawer() {
         val navigationView = binding.navigationView
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         appBarConfiguration = AppBarConfiguration(
             setOf(

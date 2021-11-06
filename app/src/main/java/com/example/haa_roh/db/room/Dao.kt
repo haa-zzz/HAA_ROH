@@ -1,9 +1,7 @@
 package com.example.haa_roh.db.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.haa_roh.bean.room.PersonalInformation
 import com.example.haa_roh.bean.room.PlanRoom
 
@@ -28,4 +26,11 @@ interface PlanDao{
     //查询数据
     @Query("SELECT * FROM `plan` WHERE number = :number")
     fun queryPlanByNumber(number : String) : LiveData<List<PlanRoom>>
+
+    //删除数据
+    @Delete
+    fun deletePlan(perInf : PlanRoom)
+    //修改数据
+    @Update
+    fun updatePlan(perInf : PlanRoom)
 }

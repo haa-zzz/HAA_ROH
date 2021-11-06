@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.util.Log
 import android.view.*
 import android.widget.Scroller
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,7 +71,6 @@ class SlideRecyclerView @JvmOverloads constructor(
                     // 比如使用LinearLayout作为根布局，而content部分width已经是match_parent，此时如果菜单view用的是wrap_content，menu的宽度就会为0。
                     if (mFlingView!!.childCount == 2) {
                         mMenuViewWidth = mFlingView!!.getChildAt(1).measuredWidth
-                        Log.d("HAA_ZZZ", "onInterceptTouchEvent: $mMenuViewWidth")
                     } else {
                         mMenuViewWidth = INVALID_CHILD_WIDTH
                     }
@@ -217,7 +215,7 @@ class SlideRecyclerView @JvmOverloads constructor(
      * 将显示子菜单的子view关闭
      * 这里本身是要自己来实现的，但是由于不定制item，因此不好监听器点击事件，因此需要调用者手动的关闭
      */
-    private fun closeMenu() {
+    fun closeMenu() {
         if (mFlingView != null && mFlingView!!.scrollX != 0) {
             mFlingView!!.scrollTo(0, 0)
         }
