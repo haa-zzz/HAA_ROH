@@ -28,7 +28,8 @@
         android:theme="@style/Theme.HAA_ROH"
         tools:targetApi="m">
         <activity android:name=".ui.login.LoginActivity"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -21,7 +21,7 @@ class SlideRecyclerView @JvmOverloads constructor(
     private var mVelocityTracker // 速度追踪器
             : VelocityTracker? = null
     private val mTouchSlop // 认为是滑动的最小距离（一般由系统提供）
-            : Int = ViewConfiguration.get(context).scaledTouchSlop
+            : Int = ViewConfiguration.get(context!!).scaledTouchSlop
     private var mTouchFrame // 子View所在的矩形范围
             : Rect? = null
     private val mScroller: Scroller = Scroller(context)

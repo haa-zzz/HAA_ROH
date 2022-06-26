@@ -4,14 +4,21 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import cn.bmob.v3.Bmob
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager
 
 class BaseApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
         initBnob()
+        initQMUI()
         context = this
     }
+
+    private fun initQMUI() {
+        QMUISwipeBackActivityManager.init(this)
+    }
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)

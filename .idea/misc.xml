@@ -3,11 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/activity_login.xml" value="0.12335359675785208" />
         <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/activity_main.xml" value="0.1762917933130699" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/dialog_tag.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/fragment_diary.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/fragment_plan.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/item.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/item_addplan.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/item_viewpager2.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/my_head.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/rich_edit.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/rich_edit_middle.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/rich_edit_view_fragment.xml" value="0.12335359675785208" />
+        <entry key="..\:/Android_advanced/HAA_ROH/app/src/main/res/layout/spinner_select.xml" value="0.22554347826086957" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
