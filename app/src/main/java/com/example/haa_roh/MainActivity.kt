@@ -74,25 +74,25 @@ class MainActivity : BaseActivity() {
         }
         mainViewModel.getPIFromRoom()
 
-        mainViewModel.getInitInformation().observe(this, {
+        mainViewModel.getInitInformation().observe(this) {
             if (it == null) {
                 mainViewModel.getPIFromBMob()
-            }else{
+            } else {
                 headBinding.apply {
                     photo = it.photo
                     username = it.username
                     status = it.state
                 }
             }
-        })
-        mainViewModel.bMobResult.observe(this, {
+        }
+        mainViewModel.bMobResult.observe(this) {
             val result = it ?: return@observe
             if (result.success) {
                 with(mainViewModel) { addPIToRoom(result.personalInformation) }
             } else {
                 showErrorToast(this, "获取数据失败，请检查网络连接")
             }
-        })
+        }
     }
 
     private fun initDrawer() {

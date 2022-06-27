@@ -12,6 +12,9 @@
         android:icon="@drawable/diary"
         android:title="@string/title_diary" />
 
-
+    <item
+        android:id="@+id/navigation_share"
+        android:icon="@drawable/share"
+        android:title="@string/title_share" />
 
 </menu>

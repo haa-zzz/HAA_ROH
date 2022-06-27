@@ -40,13 +40,13 @@ class DiaryFragment : BaseFragment() {
         binding.data = diaryData
         diaryViewModel.getAllData()
 
-        diaryViewModel.diaryLiveData.observe(requireActivity(),{
-            val result = it?:return@observe
-            if( result.photo.get()!= null){
+        diaryViewModel.diaryLiveData.observe(requireActivity()) {
+            val result = it ?: return@observe
+            if (result.photo.get() != null) {
                 printLog("收到： ${result.photo.get()}")
                 diaryData.photo.set(result.photo.get())
             }
-        })
+        }
     }
 
 
